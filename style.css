@@ -1,0 +1,1745 @@
+/* 
+ * 长友杯辩论赛赛果查询系统 - 样式文件
+ * 功能：定义整个系统的视觉样式
+ * 技术：CSS3
+ * 说明：采用响应式设计，适配不同屏幕尺寸
+ */
+
+/* ==================== 全局样式 ==================== */
+
+/* 重置浏览器默认样式，确保各浏览器显示一致 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 页面主体样式 */
+body {
+    font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif; /* 设置中文字体 */
+    background-color: #f5f7fa; /* 浅灰色背景 */
+    color: #333; /* 深灰色文字 */
+    line-height: 1.6; /* 行高，提高可读性 */
+}
+
+/* 主容器，限制最大宽度并居中显示 */
+.container {
+    max-width: 1200px; /* 最大宽度1200像素 */
+    margin: 0 auto; /* 水平居中 */
+    padding: 20px; /* 内边距 */
+}
+
+/* ==================== 头部样式 ==================== */
+
+/* 页面头部 */
+header {
+    text-align: center; /* 文字居中 */
+    padding: 30px 0; /* 上下内边距 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 渐变背景 */
+    color: white; /* 白色文字 */
+    border-radius: 10px; /* 圆角 */
+    margin-bottom: 20px; /* 底部外边距 */
+}
+
+/* 主标题 */
+header h1 {
+    font-size: 2.5em; /* 字体大小 */
+    margin-bottom: 10px; /* 底部外边距 */
+}
+
+/* 副标题 */
+.subtitle {
+    font-size: 1.2em; /* 字体大小 */
+    opacity: 0.9; /* 透明度 */
+}
+
+/* 主题标语 */
+.theme-slogan {
+    font-size: 1.1em;
+    color: #ffd700;
+    font-style: italic;
+    margin-top: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* ==================== 导航栏样式 ==================== */
+
+/* 导航栏容器 */
+.main-nav {
+    display: flex; /* 弹性布局 */
+    justify-content: center; /* 水平居中 */
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 10px; /* 项目间距 */
+    margin-bottom: 30px; /* 底部外边距 */
+}
+
+/* 导航链接 */
+.nav-item {
+    padding: 12px 24px; /* 内边距 */
+    background-color: white; /* 白色背景 */
+    color: #667eea; /* 紫色文字 */
+    text-decoration: none; /* 去除下划线 */
+    border-radius: 5px; /* 圆角 */
+    transition: all 0.3s ease; /* 过渡动画 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 导航链接悬停效果 */
+.nav-item:hover {
+    background-color: #667eea; /* 背景变紫色 */
+    color: white; /* 文字变白色 */
+}
+
+/* 当前页面的导航链接 */
+.nav-item.active {
+    background-color: #667eea; /* 紫色背景 */
+    color: white; /* 白色文字 */
+}
+
+/* ==================== 卡片样式 ==================== */
+
+/* 通用卡片容器 */
+.card {
+    background-color: white; /* 白色背景 */
+    border-radius: 10px; /* 圆角 */
+    padding: 30px; /* 内边距 */
+    margin-bottom: 20px; /* 底部外边距 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 卡片标题 */
+.card h2 {
+    color: #333; /* 深灰色文字 */
+    margin-bottom: 20px; /* 底部外边距 */
+    padding-bottom: 10px; /* 底部内边距 */
+    border-bottom: 2px solid #667eea; /* 底部边框 */
+}
+
+/* ==================== 表单样式 ==================== */
+
+/* 表单组（标签+输入框） */
+.form-group {
+    margin-bottom: 20px; /* 底部外边距 */
+}
+
+/* 表单标签 */
+.form-group label {
+    display: block; /* 块级元素，独占一行 */
+    margin-bottom: 8px; /* 底部外边距 */
+    font-weight: bold; /* 粗体 */
+    color: #555; /* 中灰色文字 */
+}
+
+/* 输入框和下拉框 */
+.form-group input,
+.form-group select {
+    width: 100%; /* 宽度100% */
+    padding: 12px; /* 内边距 */
+    border: 2px solid #ddd; /* 灰色边框 */
+    border-radius: 5px; /* 圆角 */
+    font-size: 1em; /* 字体大小 */
+    transition: border-color 0.3s ease; /* 边框颜色过渡动画 */
+}
+
+/* 输入框聚焦效果 */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none; /* 去除默认轮廓 */
+    border-color: #667eea; /* 边框变紫色 */
+}
+
+/* 表单行（多个表单组并排） */
+.form-row {
+    display: flex; /* 弹性布局 */
+    gap: 20px; /* 项目间距 */
+}
+
+/* 表单行中的表单组 */
+.form-row .form-group {
+    flex: 1; /* 平均分配空间 */
+}
+
+/* ==================== 按钮样式 ==================== */
+
+/* 通用按钮 */
+.btn {
+    padding: 12px 30px; /* 内边距 */
+    border: none; /* 无边框 */
+    border-radius: 5px; /* 圆角 */
+    font-size: 1em; /* 字体大小 */
+    cursor: pointer; /* 鼠标指针变为手型 */
+    transition: all 0.3s ease; /* 过渡动画 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 主按钮（紫色） */
+.btn-primary {
+    background-color: #667eea; /* 紫色背景 */
+    color: white; /* 白色文字 */
+}
+
+/* 主按钮悬停效果 */
+.btn-primary:hover {
+    background-color: #5568d3; /* 深紫色背景 */
+}
+
+/* 危险按钮（红色，用于删除） */
+.btn-danger {
+    background-color: #e74c3c; /* 红色背景 */
+    color: white; /* 白色文字 */
+}
+
+/* 危险按钮悬停效果 */
+.btn-danger:hover {
+    background-color: #c0392b; /* 深红色背景 */
+}
+
+/* 小按钮 */
+.btn-small {
+    padding: 6px 12px; /* 较小的内边距 */
+    font-size: 0.9em; /* 较小的字体 */
+}
+
+/* ==================== 表格样式 ==================== */
+
+/* 通用表格 */
+.match-table,
+.ranking-table {
+    width: 100%; /* 宽度100% */
+    border-collapse: collapse; /* 合并边框 */
+    margin-top: 20px; /* 顶部外边距 */
+}
+
+/* 表格单元格 */
+.match-table th,
+.match-table td,
+.ranking-table th,
+.ranking-table td {
+    padding: 12px; /* 内边距 */
+    text-align: left; /* 左对齐 */
+    border-bottom: 1px solid #ddd; /* 底部边框 */
+}
+
+/* 表头 */
+.match-table th,
+.ranking-table th {
+    background-color: #667eea; /* 紫色背景 */
+    color: white; /* 白色文字 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 表格行悬停效果 */
+.match-table tr:hover,
+.ranking-table tr:hover {
+    background-color: #f5f7fa; /* 浅灰色背景 */
+}
+
+/* ==================== 提示框样式 ==================== */
+
+/* 通用提示框 */
+.alert {
+    padding: 15px; /* 内边距 */
+    border-radius: 5px; /* 圆角 */
+    margin-bottom: 20px; /* 底部外边距 */
+}
+
+/* 错误提示框（红色） */
+.alert-error {
+    background-color: #fee; /* 浅红色背景 */
+    color: #c33; /* 深红色文字 */
+    border: 1px solid #fcc; /* 红色边框 */
+}
+
+/* 成功提示框（绿色） */
+.alert-success {
+    background-color: #efe; /* 浅绿色背景 */
+    color: #3c3; /* 深绿色文字 */
+    border: 1px solid #cfc; /* 绿色边框 */
+}
+
+/* ==================== 首页样式 ==================== */
+
+/* 首页内容区域 */
+.home-content {
+    text-align: center; /* 文字居中 */
+}
+
+/* 欢迎卡片 */
+.welcome-card {
+    background-color: white; /* 白色背景 */
+    border-radius: 10px; /* 圆角 */
+    padding: 40px; /* 内边距 */
+    margin-bottom: 30px; /* 底部外边距 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影 */
+}
+
+/* 功能列表 */
+.feature-list {
+    list-style: none; /* 去除默认列表样式 */
+    margin: 20px 0; /* 上下外边距 */
+}
+
+/* 功能列表项 */
+.feature-list li {
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 上下外边距 */
+    background-color: #f5f7fa; /* 浅灰色背景 */
+    border-radius: 5px; /* 圆角 */
+}
+
+/* 快捷链接容器 */
+.quick-links {
+    display: flex; /* 弹性布局 */
+    justify-content: center; /* 水平居中 */
+    gap: 20px; /* 项目间距 */
+}
+
+/* 快捷链接按钮 */
+.quick-link-btn {
+    padding: 15px 40px; /* 内边距 */
+    background-color: #667eea; /* 紫色背景 */
+    color: white; /* 白色文字 */
+    text-decoration: none; /* 去除下划线 */
+    border-radius: 5px; /* 圆角 */
+    font-weight: bold; /* 粗体 */
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 快捷链接按钮悬停效果 */
+.quick-link-btn:hover {
+    background-color: #5568d3; /* 深紫色背景 */
+}
+
+/* ==================== 查询结果样式 ==================== */
+
+/* 选手信息区域 */
+.contestant-info {
+    background-color: #f5f7fa; /* 浅灰色背景 */
+    padding: 20px; /* 内边距 */
+    border-radius: 5px; /* 圆角 */
+    margin-bottom: 20px; /* 底部外边距 */
+}
+
+/* 选手信息段落 */
+.contestant-info p {
+    margin: 10px 0; /* 上下外边距 */
+}
+
+/* 比赛结果标签 */
+.result {
+    padding: 5px 15px; /* 内边距 */
+    border-radius: 3px; /* 圆角 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 胜利标签（绿色） */
+.result.win {
+    background-color: #d4edda; /* 浅绿色背景 */
+    color: #155724; /* 深绿色文字 */
+}
+
+/* 失败标签（红色） */
+.result.lose {
+    background-color: #f8d7da; /* 浅红色背景 */
+    color: #721c24; /* 深红色文字 */
+}
+
+/* 无数据提示 */
+.no-data {
+    text-align: center; /* 文字居中 */
+    color: #999; /* 浅灰色文字 */
+    padding: 40px; /* 内边距 */
+    font-size: 1.2em; /* 字体大小 */
+}
+
+/* ==================== 排行榜样式 ==================== */
+
+/* 四强卡片 */
+.top4-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 渐变背景 */
+    color: white; /* 白色文字 */
+}
+
+/* 四强卡片标题 */
+.top4-card h2 {
+    color: white; /* 白色文字 */
+    border-bottom-color: rgba(255, 255, 255, 0.3); /* 半透明白色边框 */
+}
+
+/* 四强列表 */
+.top4-list {
+    display: grid; /* 网格布局 */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 自适应列数 */
+    gap: 20px; /* 项目间距 */
+}
+
+/* 四强项目 */
+.top4-item {
+    background-color: rgba(255, 255, 255, 0.1); /* 半透明白色背景 */
+    padding: 20px; /* 内边距 */
+    border-radius: 10px; /* 圆角 */
+    display: flex; /* 弹性布局 */
+    align-items: center; /* 垂直居中 */
+    gap: 15px; /* 项目间距 */
+}
+
+/* 排名徽章 */
+.rank-badge {
+    width: 50px; /* 宽度 */
+    height: 50px; /* 高度 */
+    background-color: white; /* 白色背景 */
+    color: #667eea; /* 紫色文字 */
+    border-radius: 50%; /* 圆形 */
+    display: flex; /* 弹性布局 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    font-size: 1.5em; /* 字体大小 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 冠军徽章（金色） */
+.rank-1 .rank-badge {
+    background-color: #ffd700; /* 金色 */
+    color: white; /* 白色文字 */
+}
+
+/* 亚军徽章（银色） */
+.rank-2 .rank-badge {
+    background-color: #c0c0c0; /* 银色 */
+    color: white; /* 白色文字 */
+}
+
+/* 季军徽章（铜色） */
+.rank-3 .rank-badge {
+    background-color: #cd7f32; /* 铜色 */
+    color: white; /* 白色文字 */
+}
+
+/* 虚位以待样式 */
+.placeholder-item {
+    opacity: 0.6;
+}
+
+.placeholder-item .rank-badge {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.placeholder-item .name {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* 选手详情 */
+.contestant-details .name {
+    font-size: 1.3em; /* 字体大小 */
+    font-weight: bold; /* 粗体 */
+    margin-bottom: 5px; /* 底部外边距 */
+}
+
+/* 选手信息 */
+.contestant-details .info {
+    opacity: 0.9; /* 透明度 */
+    font-size: 0.9em; /* 字体大小 */
+}
+
+/* 嘉宾徽章 */
+.guest-badge {
+    padding: 3px 10px; /* 内边距 */
+    background-color: #ffc107; /* 黄色背景 */
+    color: #333; /* 深色文字 */
+    border-radius: 3px; /* 圆角 */
+    font-size: 0.9em; /* 字体大小 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* ==================== 往届赛果页面样式 ==================== */
+
+/* 赛季卡片 */
+.season-card {
+    margin-bottom: 40px;
+}
+
+/* 最终结果区域 */
+.final-results {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+}
+
+.final-results h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 结果网格 */
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.result-grid-four {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-sub {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 三列结果网格（不含殿军） */
+.result-grid-three {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 结果项 */
+.result-item {
+    text-align: center;
+    padding: 20px 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+/* 冠军 */
+.result-item.champion {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+}
+
+/* 亚军 */
+.result-item.runner-up {
+    background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+}
+
+/* 季军 */
+.result-item.third-place {
+    background: linear-gradient(135deg, #cd7f32, #b06820);
+}
+
+/* 殿军 */
+.result-item.fourth-place {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* 晋级四强排名 */
+.result-item.rank-1 {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+}
+
+.result-item.rank-2 {
+    background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+}
+
+.result-item.rank-3 {
+    background: linear-gradient(135deg, #cd7f32, #b06820);
+}
+
+.result-item.rank-4 {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.result-item.placeholder-item {
+    background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+    color: #666;
+}
+
+/* 结果排名文字 */
+.result-rank {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 结果姓名 */
+.result-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* 荣誉区域 */
+.honors {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* 荣誉徽章 */
+.honor-badge {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.honor-badge.mvp {
+    background-color: #ffd700;
+    color: #333;
+}
+
+.honor-badge.best-debater {
+    background-color: #667eea;
+    color: white;
+}
+
+/* 阶段区域 */
+.stage-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.stage-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+/* 分组表格 */
+.group-table {
+    margin-bottom: 20px;
+}
+
+.group-table h4 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+/* 历史表格 */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.history-table th,
+.history-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.history-table th {
+    background-color: #667eea;
+    color: white;
+    font-weight: bold;
+}
+
+.history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 状态徽章 */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.status-badge.status-advance {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.status-repechage {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.status-withdraw {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-badge.status-eliminated {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+/* 复活赛区域 */
+.repechage-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.repechage-participants {
+    display: flex;
+    gap: 15px;
+}
+
+.repechage-item {
+    background-color: #f5f7fa;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.repechage-name {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.repechage-score {
+    font-size: 1.2em;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.repechage-result {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.repechage-result .status-badge {
+    display: inline-block;
+}
+
+.repechage-rankings {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.repechage-ranking-item {
+    padding: 6px 15px;
+    background-color: #e2e3e5;
+    color: #383d41;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* 半决赛区域 */
+.semifinal-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* 四强区域 */
+.final-four-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+}
+
+.final-four-section h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.final-four-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.final-four-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #667eea;
+}
+
+.final-four-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+.semifinal-round h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* 比赛卡片 */
+.match-card {
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.match-participants {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.participant {
+    padding: 8px 15px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.participant.winner {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.vs {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.match-winner {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 比赛描述 */
+.match-description {
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* 团队赛卡片 */
+.team-match-card {
+    background-color: #f5f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* 团队对战 */
+.team-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+/* 团队 */
+.team {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 150px;
+    border: 2px solid transparent;
+}
+
+.team.winner-team {
+    border-color: #d4edda;
+    background-color: #d4edda;
+}
+
+.team-label {
+    display: block;
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.team-members {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.team-member {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* 大型VS */
+.vs-large {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* 直接晋级 */
+.direct-advance {
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* 比赛结果 */
+.match-result {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* 详细比赛卡片 */
+.detail-match-card {
+    background-color: #f5f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.match-round-section {
+    margin-bottom: 25px;
+}
+
+.match-round-section h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #eee;
+}
+
+.match-header {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.match-date {
+    font-size: 0.85em;
+    color: #666;
+}
+
+.match-label {
+    background-color: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.match-topic {
+    text-align: center;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.match-sides {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.side {
+    padding: 8px 15px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.side.winner-side {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.match-score {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.match-result-detail {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.match-notes {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.match-notes p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.player-destinations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.player-dest-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.player-dest-name {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.player-dest-badge {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.player-dest-badge.dest-advance {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.player-dest-badge.dest-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.player-dest-badge.dest-eliminated {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.final-match-card {
+    border: 2px solid #ffd700;
+}
+
+/* 小组赛区域 */
+.group-standings {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.group-standings h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.group-note {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+.group-table h5 {
+    color: #667eea;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+/* 复活赛详细 */
+.repechage-detail {
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+}
+
+.repechage-participants-detail {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.repechage-item-detail {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 120px;
+    border: 2px solid transparent;
+}
+
+.repechage-item-detail.repechage-winner {
+    border-color: #d4edda;
+    background-color: #d4edda;
+}
+
+.repechage-role {
+    display: block;
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.repechage-name {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.repechage-score {
+    display: block;
+    font-size: 1.2em;
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* 半决赛区域 */
+.semifinal-match-section {
+    margin-bottom: 25px;
+}
+
+.semifinal-match-section h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+/* 四强区域 */
+.final-four-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+}
+
+.final-four-section h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.final-four-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.final-four-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #667eea;
+}
+
+.final-four-order {
+    display: block;
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.final-four-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 决赛详细 */
+.finals-detail {
+    padding: 20px;
+}
+
+.finals-detail .match-topic {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* 决赛区域 */
+.finals-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.final-match {
+    border: 2px solid #667eea;
+}
+
+.final-match h4 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.championship-match {
+    border-color: #ffd700;
+}
+
+.championship-match h4 {
+    color: #ffd700;
+}
+
+/* ==================== 用户信息样式 ==================== */
+
+/* 用户信息区域（头部右侧） */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 用户名文字 */
+.user-info span {
+    font-size: 1em;
+    opacity: 0.95;
+}
+
+/* 登出按钮 */
+.btn-logout {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-logout:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== 登录页面样式 ==================== */
+
+/* 登录卡片 */
+.login-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 登录卡片标题 */
+.login-card h2 {
+    color: #333;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #667eea;
+    text-align: center;
+}
+
+/* 登录按钮 */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+/* 账号说明区域 */
+.account-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* 账号说明标题 */
+.account-info h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+/* 账号说明表格 */
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+.info-table th,
+.info-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.info-table th {
+    background-color: #f5f7fa;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.info-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* ==================== 错误页面样式 ==================== */
+
+/* 错误卡片 */
+.error-card {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+/* 错误信息 */
+.error-message {
+    font-size: 1.2em;
+    color: #e74c3c;
+    margin: 30px 0;
+}
+
+/* ==================== 底部样式 ==================== */
+
+/* 页面底部 */
+footer {
+    text-align: center; /* 文字居中 */
+    padding: 20px; /* 内边距 */
+    margin-top: 40px; /* 顶部外边距 */
+    color: #999; /* 浅灰色文字 */
+    border-top: 1px solid #ddd; /* 顶部边框 */
+}
+
+/* ==================== 响应式设计 ==================== */
+
+/* 平板设备（宽度小于768px） */
+@media (max-width: 768px) {
+    /* 主标题字体缩小 */
+    header h1 {
+        font-size: 2em;
+    }
+    
+    /* 导航栏改为纵向排列 */
+    .main-nav {
+        flex-direction: column;
+    }
+    
+    /* 表单行改为纵向排列 */
+    .form-row {
+        flex-direction: column;
+    }
+    
+    /* 四强列表改为单列 */
+    .top4-list {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 快捷链接改为纵向排列 */
+    .quick-links {
+        flex-direction: column;
+    }
+    
+    /* 表格可横向滚动 */
+    .match-table,
+    .ranking-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    /* 结果网格改为2列 */
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .result-grid-four {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* 三列结果网格改为2列 */
+    .result-grid-three {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* 四强网格改为2列 */
+    .final-four-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* 复活赛参与者改为单列 */
+    .repechage-participants-detail {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* 比赛对阵改为单列 */
+    .match-sides {
+        flex-direction: column;
+    }
+    
+    /* 选手去向改为单列 */
+    .player-destinations {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 复活赛排名改为单列 */
+    .repechage-rankings {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* 半决赛区域改为单列 */
+    .semifinal-section {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 决赛区域改为单列 */
+    .finals-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 手机设备（宽度小于480px） */
+@media (max-width: 480px) {
+    /* 主容器内边距减小 */
+    .container {
+        padding: 10px;
+    }
+    
+    /* 主标题字体进一步缩小 */
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    /* 卡片内边距减小 */
+    .card {
+        padding: 20px;
+    }
+}
+
+.query-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.query-buttons .btn {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* 修改密码表单样式 */
+.change-password-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-buttons .btn {
+    flex: 1;
+}
+
+/* 投票页面样式 */
+.poll-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.poll-item {
+    background-color: #f5f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.poll-item.poll-completed {
+    border-left-color: #28a745;
+}
+
+.poll-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.poll-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.poll-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.status-active {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-qualified {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-repechage {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-eliminated {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.poll-sides {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.side-tag {
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.side-positive {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.side-negative {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.vote-form {
+    margin-top: 15px;
+}
+
+.vote-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-positive {
+    background-color: #28a745;
+    color: white;
+    flex: 1;
+}
+
+.btn-positive:hover {
+    background-color: #218838;
+}
+
+.btn-negative {
+    background-color: #dc3545;
+    color: white;
+    flex: 1;
+}
+
+.btn-negative:hover {
+    background-color: #c82333;
+}
+
+.vote-status {
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.poll-results {
+    margin-top: 15px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.result-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.result-value {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.2em;
+}
+
+.result-winner {
+    text-align: center;
+    padding: 12px;
+    background-color: #d4edda;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #155724;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* 创建投票表单样式 */
+.create-poll-form {
+    max-width: 600px;
+}
+
+.voter-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.voter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.voter-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+/* 投票表格样式 */
+.poll-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.poll-table th,
+.poll-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.poll-table th {
+    background-color: #f5f7fa;
+    font-weight: bold;
+    color: #333;
+}
+
+.poll-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* 往届赛果查询结果 */
+.history-result {
+    margin-top: 20px;
+}
+
+.history-match-item {
+    background-color: #f5f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.history-match-item h4 {
+    color: #667eea;
+    margin-bottom: 8px;
+}
+
+.history-match-item .match-topic {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.match-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.match-detail .side-left,
+.match-detail .side-right {
+    padding: 8px 15px;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.match-detail .winner {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.match-detail .match-score {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.repechage-detail {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.match-note {
+    margin-top: 10px;
+    font-style: italic;
+    color: #666;
+}

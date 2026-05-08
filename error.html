@@ -1,0 +1,35 @@
+<!-- 
+    错误页面 - error.html
+    功能：显示错误信息，如权限不足等
+    技术：HTML5
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+        </header>
+        
+        <main>
+            <div class="card error-card">
+                <h2>访问错误</h2>
+                <p class="error-message">{{ message }}</p>
+                <a href="/" class="btn btn-primary">返回首页</a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

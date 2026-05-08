@@ -1,0 +1,182 @@
+<!-- 
+    管理员后台页面 - admin.html
+    功能：录入比赛结果、删除比赛记录
+    技术：HTML5 + Jinja2模板引擎 + JavaScript
+    说明：只有主理人和管理员才能访问此页面
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item">投票</a>
+            <a href="/admin" class="nav-item active">管理员</a>
+        </nav>
+        
+        <main>
+            <div class="card">
+                <h2>添加比赛结果</h2>
+                
+                {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+                {% endif %}
+                
+                <form action="/admin/add_match" method="POST" class="add-match-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="group">小组：</label>
+                            <select name="group" id="group" onchange="updateContestants()">
+                                <option value="A">A组</option>
+                                <option value="B">B组</option>
+                                <option value="C">C组</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">日期：</label>
+                            <input type="date" name="date" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">时间：</label>
+                            <input type="time" name="time" id="time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic">辩题：</label>
+                        <input type="text" name="topic" id="topic" placeholder="请输入辩题">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="participant1">选手1：</label>
+                            <select name="participant1" id="participant1">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="score1">得分1：</label>
+                            <input type="number" name="score1" id="score1" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="participant2">选手2：</label>
+                            <select name="participant2" id="participant2">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="score2">得分2：</label>
+                            <input type="number" name="score2" id="score2" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="winner">获胜者：</label>
+                        <select name="winner" id="winner">
+                            <option value="">请选择</option>
+                            <option value="participant1">选手1</option>
+                            <option value="participant2">选手2</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">添加比赛结果</button>
+                </form>
+            </div>
+            
+            <div class="card">
+                <h2>已录入的比赛</h2>
+                
+                {% if not matches %}
+                <p class="no-data">暂无比赛记录</p>
+                {% else %}
+                <table class="match-table">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>小组</th>
+                            <th>日期</th>
+                            <th>辩题</th>
+                            <th>选手1</th>
+                            <th>得分</th>
+                            <th>选手2</th>
+                            <th>获胜者</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for match in matches %}
+                        <tr>
+                            <td>{{ match.id }}</td>
+                            <td>{{ match.group }}组</td>
+                            <td>{{ match.date }}</td>
+                            <td>{{ match.topic }}</td>
+                            <td>{{ match.participant1 }}</td>
+                            <td>{{ match.score1 }} : {{ match.score2 }}</td>
+                            <td>{{ match.participant2 }}</td>
+                            <td>{{ match.winner }}</td>
+                            <td>
+                                <form action="/admin/delete_match/{{ match.id }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-small" onclick="return confirm('确定删除吗？')">删除</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+    
+    <script>
+        const contestantsData = {{ contestants | tojson }};
+        
+        function updateContestants() {
+            const group = document.getElementById('group').value;
+            const p1 = document.getElementById('participant1');
+            const p2 = document.getElementById('participant2');
+            
+            p1.innerHTML = '<option value="">请选择</option>';
+            p2.innerHTML = '<option value="">请选择</option>';
+            
+            contestantsData.filter(c => c.group === group).forEach(c => {
+                p1.innerHTML += `<option value="${c.name}">${c.name}</option>`;
+                p2.innerHTML += `<option value="${c.name}">${c.name}</option>`;
+            });
+        }
+        
+        updateContestants();
+        
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+        const timeStr = now.toTimeString().split(' ')[0].substring(0, 5);
+        document.getElementById('date').value = dateStr;
+        document.getElementById('time').value = timeStr;
+    </script>
+</body>
+</html>

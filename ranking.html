@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排行榜 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item active">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item">投票</a>
+        </nav>
+        
+        <main>
+            <div class="card season-card">
+                <h2>第二季排行榜</h2>
+                
+                <div class="final-results">
+                    <h3>晋级四强</h3>
+                    <div class="result-grid result-grid-four">
+                        {% for contestant in top4 %}
+                        <div class="result-item {% if contestant.name == '虚位以待' %}placeholder-item{% else %}rank-{{ loop.index }}{% endif %}">
+                            <div class="result-rank">{{ loop.index }}</div>
+                            {% if contestant.name == '虚位以待' %}
+                            <div class="result-name">虚位以待</div>
+                            {% else %}
+                            <div class="result-name">{{ contestant.name }}</div>
+                            <div class="result-sub">{{ contestant.group }}组 | 胜{{ contestant.wins }}场 | 积分{{ contestant.points }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                {% for group in ['A', 'B', 'C'] %}
+                <div class="stage-section">
+                    <h3>{{ group }}组排名</h3>
+                    <div class="group-table">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>选手</th>
+                                    <th>比赛场次</th>
+                                    <th>胜场</th>
+                                    <th>平局</th>
+                                    <th>负场</th>
+                                    <th>积分</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for contestant in group_rankings[group] %}
+                                <tr>
+                                    <td>{{ contestant.name }}</td>
+                                    <td>{{ contestant.match_count }}</td>
+                                    <td>{{ contestant.wins }}</td>
+                                    <td>{{ contestant.draws }}</td>
+                                    <td>{{ contestant.losses }}</td>
+                                    <td>{{ contestant.points }}</td>
+                                    <td>
+                                        {% if contestant.status %}
+                                        <span class="status-badge {% if contestant.status == '晋级四强' %}status-qualified{% elif contestant.status == '进入复活赛' %}status-repechage{% else %}status-eliminated{% endif %}">
+                                            {{ contestant.status }}
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

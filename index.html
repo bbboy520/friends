@@ -1,0 +1,68 @@
+<!-- 
+    首页模板 - index.html
+    功能：显示系统首页，提供功能导航
+    技术：HTML5 + Jinja2模板引擎
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 字符编码设置，支持中文显示 -->
+    <meta charset="UTF-8">
+    <!-- 响应式布局设置，适配手机等移动设备 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 页面标题 -->
+    <title>长友杯辩论赛</title>
+    <!-- 引入外部CSS样式文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- 主容器，包含整个页面内容 -->
+    <div class="container">
+        <!-- 页面头部 -->
+        <header>
+            <!-- 主标题 -->
+            <h1>长友杯辩论赛</h1>
+            <!-- 副标题 -->
+            <p class="subtitle">赛果查询系统</p>
+            <!-- 主题标语 -->
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <!-- 用户信息和登出按钮 -->
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item active">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item">投票</a>
+        </nav>
+        
+        <main class="home-content">
+            <div class="welcome-card">
+                <h2>欢迎使用辩论赛赛果查询系统</h2>
+                <p>本系统提供以下功能：</p>
+                <ul class="feature-list">
+                    <li>查看各小组排名</li>
+                    <li>查看比赛详细信息</li>
+                    <li>查看往届赛果</li>
+                    <li>参与投票</li>
+                </ul>
+            </div>
+            
+            <div class="quick-links">
+                <a href="/ranking" class="quick-link-btn">查看排行榜</a>
+            </div>
+        </main>
+        
+        <!-- 页面底部 -->
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比赛详情 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item active">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item">投票</a>
+        </nav>
+        
+        <main>
+            {% if not matches %}
+            <div class="card">
+                <h2>比赛详情</h2>
+                <p class="no-data">暂无比赛记录</p>
+            </div>
+            {% else %}
+            <div class="card season-card">
+                <h2>第二季小组赛</h2>
+                
+                {% for group in ['A', 'B', 'C'] %}
+                {% if matches | selectattr('group', 'equalto', group) | list %}
+                <div class="stage-section">
+                    <h3>{{ group }}组</h3>
+                    
+                    {% for match in matches if match.group == group %}
+                    <div class="detail-match-card">
+                        <div class="match-header">
+                            <span class="match-label">{{ match.id }}</span>
+                            <span class="match-date">{{ match.date }} {{ match.time }}</span>
+                        </div>
+                        <div class="match-topic">{{ match.topic }}</div>
+                        <div class="match-sides">
+                            <span class="side {% if match.winner == match.participant1 %}winner-side{% endif %}">正方：{{ match.participant1 }}</span>
+                            <span class="match-score">{{ match.score1 }} : {{ match.score2 }}</span>
+                            <span class="side {% if match.winner == match.participant2 %}winner-side{% endif %}">反方：{{ match.participant2 }}</span>
+                        </div>
+                        <div class="match-result-detail">
+                            {% if match.winner == '平局' %}
+                            <span class="status-badge status-repechage">平局</span>
+                            {% else %}
+                            <span class="status-badge status-advance">{{ match.winner }} 胜</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+                {% if matches | selectattr('group', 'equalto', '复活赛') | list %}
+                <div class="stage-section">
+                    <h3>复活赛</h3>
+                    {% for match in matches if match.group == '复活赛' %}
+                    <div class="detail-match-card">
+                        <div class="match-header">
+                            <span class="match-label">{{ match.id }}</span>
+                            <span class="match-date">{{ match.date }} {{ match.time }}</span>
+                        </div>
+                        <div class="match-topic">{{ match.topic }}</div>
+                        <div class="match-sides">
+                            <span class="side {% if match.winner == match.participant1 %}winner-side{% endif %}">正方：{{ match.participant1 }}</span>
+                            <span class="match-score">{{ match.score1 }} : {{ match.score2 }}</span>
+                            <span class="side {% if match.winner == match.participant2 %}winner-side{% endif %}">反方：{{ match.participant2 }}</span>
+                        </div>
+                        <div class="match-result-detail">
+                            {% if match.winner == '平局' %}
+                            <span class="status-badge status-repechage">平局</span>
+                            {% else %}
+                            <span class="status-badge status-advance">{{ match.winner }} 胜</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if matches | selectattr('group', 'equalto', '投票') | list %}
+                <div class="stage-section">
+                    <h3>投票赛果</h3>
+                    {% for match in matches if match.group == '投票' %}
+                    <div class="detail-match-card">
+                        <div class="match-header">
+                            <span class="match-label">{{ match.id }}</span>
+                            <span class="match-date">{{ match.date }}</span>
+                        </div>
+                        <div class="match-topic">{{ match.topic }}</div>
+                        <div class="match-sides">
+                            <span class="side {% if match.winner == match.participant1 %}winner-side{% endif %}">正方：{{ match.participant1 }}</span>
+                            <span class="match-score">{{ match.score1 }} : {{ match.score2 }}</span>
+                            <span class="side {% if match.winner == match.participant2 %}winner-side{% endif %}">反方：{{ match.participant2 }}</span>
+                        </div>
+                        <div class="match-result-detail">
+                            {% if match.winner == '平局' %}
+                            <span class="status-badge status-repechage">平局</span>
+                            {% else %}
+                            <span class="status-badge status-advance">{{ match.winner }} 胜</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!-- 
+    往届赛果页面 - history.html
+    功能：显示历届比赛的赛果记录
+    技术：HTML5 + Jinja2模板引擎
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>往届赛果 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item active">往届赛果</a>
+            <a href="/vote" class="nav-item">投票</a>
+        </nav>
+        
+        <main>
+            {% if not seasons %}
+            <div class="card">
+                <h2>往届赛果</h2>
+                <p class="no-data">暂无往届赛果记录</p>
+            </div>
+            {% else %}
+            {% for season in seasons %}
+            <div class="card season-card">
+                <h2>{{ season.season_name }} ({{ season.year }})</h2>
+                
+                <!-- 最终结果 -->
+                <div class="final-results">
+                    <h3>最终结果</h3>
+                    <div class="result-grid result-grid-three">
+                        <div class="result-item champion">
+                            <div class="result-rank">冠军</div>
+                            <div class="result-name">{{ season.results.champion }}</div>
+                        </div>
+                        <div class="result-item runner-up">
+                            <div class="result-rank">亚军</div>
+                            <div class="result-name">{{ season.results.runner_up }}</div>
+                        </div>
+                        <div class="result-item third-place">
+                            <div class="result-rank">季军</div>
+                            <div class="result-name">{{ season.results.third_place }}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 小组赛 -->
+                <div class="stage-section">
+                    <h3>#1 小组赛</h3>
+                    
+                    <!-- 小组赛第一轮 -->
+                    <div class="match-round-section">
+                        <h4>第一轮</h4>
+                        {% for match in season.group_stage.round1 %}
+                        <div class="detail-match-card">
+                            <div class="match-header">
+                                <span class="match-label">{{ match.match }}</span>
+                            </div>
+                            <div class="match-topic">{{ match.topic }}</div>
+                            <div class="match-sides">
+                                <span class="side {% if match.winner in match.side1 %}winner-side{% endif %}">{{ match.side1 }}</span>
+                                <span class="match-score">{{ match.score }}</span>
+                                <span class="side {% if match.winner in match.side2 %}winner-side{% endif %}">{{ match.side2 }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- 小组赛第二轮 -->
+                    <div class="match-round-section">
+                        <h4>第二轮</h4>
+                        {% for match in season.group_stage.round2 %}
+                        <div class="detail-match-card">
+                            <div class="match-header">
+                                <span class="match-label">{{ match.match }}</span>
+                            </div>
+                            <div class="match-topic">{{ match.topic }}</div>
+                            <div class="match-sides">
+                                <span class="side {% if match.winner in match.side1 %}winner-side{% endif %}">{{ match.side1 }}</span>
+                                <span class="match-score">{{ match.score }}</span>
+                                <span class="side {% if match.winner in match.side2 %}winner-side{% endif %}">{{ match.side2 }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- 小组赛第三轮 -->
+                    <div class="match-round-section">
+                        <h4>第三轮</h4>
+                        {% for match in season.group_stage.round3 %}
+                        <div class="detail-match-card">
+                            <div class="match-header">
+                                <span class="match-label">{{ match.match }}</span>
+                            </div>
+                            <div class="match-topic">{{ match.topic }}</div>
+                            <div class="match-sides">
+                                <span class="side {% if match.winner in match.side1 %}winner-side{% endif %}">{{ match.side1 }}</span>
+                                <span class="match-score">{{ match.score }}</span>
+                                <span class="side {% if match.winner in match.side2 %}winner-side{% endif %}">{{ match.side2 }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- 小组积分榜 -->
+                    <div class="group-standings">
+                        <h4>小组积分榜</h4>
+                        {% for group_name, contestants in season.group_stage.groups.items() %}
+                        <div class="group-table">
+                            <h5>{{ group_name }}组</h5>
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>选手</th>
+                                        <th>胜</th>
+                                        <th>负</th>
+                                        <th>积分</th>
+                                        <th>结果</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for c in contestants %}
+                                    <tr>
+                                        <td>{{ c.name }}</td>
+                                        <td>{{ c.wins }}</td>
+                                        <td>{{ c.losses }}</td>
+                                        <td>{{ c.points }}</td>
+                                        <td>
+                                            {% if '晋级' in c.status %}
+                                                <span class="status-badge status-advance">{{ c.status }}</span>
+                                            {% elif '复活' in c.status %}
+                                                <span class="status-badge status-repechage">{{ c.status }}</span>
+                                            {% elif '退赛' in c.status %}
+                                                <span class="status-badge status-eliminated">{{ c.status }}</span>
+                                            {% else %}
+                                                <span class="status-badge status-eliminated">{{ c.status }}</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endfor %}
+                        <p class="group-note">注：胜者积3分，败者积0分；C组与退赛选手交战记录不计入积分</p>
+                    </div>
+                </div>
+                
+                <!-- 复活赛 -->
+                <div class="stage-section">
+                    <h3>#2 复活赛</h3>
+                    <div class="repechage-detail">
+                        <div class="match-topic">{{ season.repechage.topic }}</div>
+                        <div class="repechage-participants-detail">
+                            {% for p in season.repechage.participants %}
+                            <div class="repechage-item-detail {% if p.name == season.repechage.winner %}repechage-winner{% endif %}">
+                                <span class="repechage-role">{{ p.role }}</span>
+                                <span class="repechage-name">{{ p.name }}</span>
+                                <span class="repechage-score">{{ p.score }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="repechage-result">
+                            <span class="status-badge status-advance">{{ season.repechage.winner }} {{ season.repechage.advancing }}</span>
+                        </div>
+                        <div class="repechage-rankings">
+                            {% for r in season.repechage.rankings %}
+                            <span class="repechage-ranking-item">{{ r.name }} {{ r.rank }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 半决赛 -->
+                <div class="stage-section">
+                    <h3>#3 半决赛</h3>
+                    
+                    <!-- 四强名单 -->
+                    <div class="final-four-section">
+                        <h4>四强选手</h4>
+                        <div class="final-four-grid">
+                            <div class="final-four-item">
+                                <span class="final-four-order">A组第一</span>
+                                <span class="final-four-name">{{ season.semifinals.final_four[0] }}</span>
+                            </div>
+                            <div class="final-four-item">
+                                <span class="final-four-order">B组第一</span>
+                                <span class="final-four-name">{{ season.semifinals.final_four[1] }}</span>
+                            </div>
+                            <div class="final-four-item">
+                                <span class="final-four-order">C组第一</span>
+                                <span class="final-four-name">{{ season.semifinals.final_four[2] }}</span>
+                            </div>
+                            <div class="final-four-item">
+                                <span class="final-four-order">复活赛第一</span>
+                                <span class="final-four-name">{{ season.semifinals.final_four[3] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 半决赛第一场：2v2 -->
+                    <div class="semifinal-match-section">
+                        <h4>第一场（2v2团队赛）</h4>
+                        <div class="detail-match-card">
+                            <div class="match-topic">{{ season.semifinals.round1.topic }}</div>
+                            <div class="match-sides">
+                                <span class="side">{{ season.semifinals.round1.side1 }}</span>
+                                <span class="match-score">{{ season.semifinals.round1.score }}</span>
+                                <span class="side winner-side">{{ season.semifinals.round1.side2 }}</span>
+                            </div>
+                            <div class="match-result-detail">
+                                <span class="status-badge status-advance">{{ season.semifinals.round1.winner }}胜</span>
+                            </div>
+                            <div class="match-notes">
+                                <div class="player-destinations">
+                                    <div class="player-dest-item">
+                                        <span class="player-dest-name">{{ season.semifinals.round1.notes.advance }}</span>
+                                        <span class="player-dest-badge dest-advance">{{ season.semifinals.round1.notes.advance_note }}</span>
+                                    </div>
+                                    <div class="player-dest-item">
+                                        <span class="player-dest-name">{{ season.semifinals.round1.notes.pending_winner }}</span>
+                                        <span class="player-dest-badge dest-pending">{{ season.semifinals.round1.notes.pending_winner_note }}</span>
+                                    </div>
+                                    <div class="player-dest-item">
+                                        <span class="player-dest-name">{{ season.semifinals.round1.notes.pending_loser }}</span>
+                                        <span class="player-dest-badge dest-pending">{{ season.semifinals.round1.notes.pending_loser_note }}</span>
+                                    </div>
+                                    <div class="player-dest-item">
+                                        <span class="player-dest-name">{{ season.semifinals.round1.notes.eliminated }}</span>
+                                        <span class="player-dest-badge dest-eliminated">{{ season.semifinals.round1.notes.eliminated_note }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 半决赛第二场：1v1 -->
+                    <div class="semifinal-match-section">
+                        <h4>第二场（1v1）</h4>
+                        <div class="detail-match-card">
+                            <div class="match-topic">{{ season.semifinals.round2.topic }}</div>
+                            <div class="match-sides">
+                                <span class="side">{{ season.semifinals.round2.side1 }}</span>
+                                <span class="match-score">{{ season.semifinals.round2.score }}</span>
+                                <span class="side winner-side">{{ season.semifinals.round2.side2 }}</span>
+                            </div>
+                            <div class="match-result-detail">
+                                <span class="status-badge status-advance">{{ season.semifinals.round2.match.winner }} {{ season.semifinals.round2.match.winner_note }}</span>
+                                <span class="status-badge status-eliminated">{{ season.semifinals.round2.match.participant2 }} {{ season.semifinals.round2.match.loser_note }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 决赛 -->
+                <div class="stage-section">
+                    <h3>#4 决赛</h3>
+                    <div class="finals-detail">
+                        <div class="match-topic">{{ season.finals.topic }}</div>
+                        <div class="detail-match-card final-match-card">
+                            <div class="match-sides">
+                                <span class="side winner-side">{{ season.finals.championship.side1 }}</span>
+                                <span class="match-score">{{ season.finals.championship.score }}</span>
+                                <span class="side">{{ season.finals.championship.side2 }}</span>
+                            </div>
+                            <div class="match-result-detail">
+                                <span class="status-badge status-advance">{{ season.finals.championship.participant1 }} {{ season.finals.championship.participant1_note }}</span>
+                                <span class="status-badge status-eliminated">{{ season.finals.championship.participant2 }} {{ season.finals.championship.participant2_note }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </main>
+        
+        <footer>
+            <p>长友杯辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

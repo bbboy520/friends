@@ -1,0 +1,98 @@
+<!-- 
+    创建投票页面 - create_poll.html
+    功能：主理人和管理员创建新投票
+    技术：HTML5 + Jinja2模板引擎
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建投票 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item active">投票</a>
+            {% if 'admin' in user.roles or 'manager' in user.roles %}
+            <a href="/vote/create" class="nav-item active">发布投票</a>
+            {% endif %}
+        </nav>
+        
+        <main>
+            <div class="card">
+                <h2>发布新投票</h2>
+                
+                {% if error %}
+                <div class="alert alert-error">{{ error }}</div>
+                {% endif %}
+                
+                {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+                {% endif %}
+                
+                <form action="/vote/create" method="POST" class="create-poll-form">
+                    <div class="form-group">
+                        <label for="topic">辩题：</label>
+                        <input type="text" name="topic" id="topic" required placeholder="例如：当今社会，孙悟空/猪八戒/沙僧谁能活得更好">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="positive_side">正方选手：</label>
+                        <input type="text" name="positive_side" id="positive_side" required placeholder="例如：王羿嘉彤">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="negative_side">反方选手：</label>
+                        <input type="text" name="negative_side" id="negative_side" required placeholder="例如：谢佳琪">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>指定投票人（勾选）：</label>
+                        <div class="voter-checkboxes">
+                            {% for u in all_users %}
+                            {% if u.username == '张涵' and 'guest' in u.roles %}
+                            <label class="voter-checkbox">
+                                <input type="checkbox" name="voters" value="{{ u.username }}">
+                                <span>{{ u.name }} (guest)</span>
+                            </label>
+                            {% elif u.username != '张涵' %}
+                            <label class="voter-checkbox">
+                                <input type="checkbox" name="voters" value="{{ u.username }}">
+                                <span>{{ u.name }} ({{ u.roles | join(', ') }})</span>
+                            </label>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">发布投票</button>
+                        <a href="/vote" class="btn btn-secondary">返回投票页</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

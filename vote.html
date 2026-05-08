@@ -1,0 +1,189 @@
+<!-- 
+    投票页面 - vote.html
+    功能：显示投票列表、参与投票、查看结果
+    技术：HTML5 + Jinja2模板引擎
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投票 - 长友杯辩论赛</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>长友杯辩论赛</h1>
+            <p class="subtitle">赛果查询系统</p>
+            <p class="theme-slogan">愿岁并谢，与长友兮</p>
+            <div class="user-info">
+                <span>欢迎，{{ user.name }} ({{ user.roles | join(', ') }})</span>
+                <a href="/change_password" class="btn btn-small btn-secondary">修改密码</a>
+                <a href="/logout" class="btn btn-small btn-logout">登出</a>
+            </div>
+        </header>
+        
+        <nav class="main-nav">
+            <a href="/" class="nav-item">首页</a>
+            <a href="/ranking" class="nav-item">排行榜</a>
+            <a href="/detail" class="nav-item">比赛详情</a>
+            <a href="/history" class="nav-item">往届赛果</a>
+            <a href="/vote" class="nav-item active">投票</a>
+        </nav>
+        
+        <main>
+            {% if error %}
+            <div class="alert alert-error">{{ error }}</div>
+            {% endif %}
+            
+            {% if 'admin' in user.roles or 'manager' in user.roles %}
+            <div class="card">
+                <h2>管理投票</h2>
+                <a href="/vote/create" class="btn btn-primary">发布新投票</a>
+            </div>
+            {% endif %}
+            
+            <div class="card">
+                <h2>我的投票</h2>
+                {% if my_polls %}
+                <div class="poll-list">
+                    {% for poll in my_polls %}
+                    <div class="poll-item {% if poll.status == 'completed' %}poll-completed{% endif %}">
+                        <div class="poll-header">
+                            <h3>{{ poll.topic }}</h3>
+                            <span class="poll-status {% if poll.status == 'active' %}status-active{% else %}status-completed{% endif %}">
+                                {% if poll.status == 'active' %}投票中{% else %}已结束{% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="poll-sides">
+                            <span class="side-tag side-positive">正方：{{ poll.positive_side }}</span>
+                            <span class="side-tag side-negative">反方：{{ poll.negative_side }}</span>
+                        </div>
+                        
+                        {% if poll.status == 'active' and not poll.has_voted %}
+                        <form action="/vote/submit" method="POST" class="vote-form">
+                            <input type="hidden" name="poll_id" value="{{ poll.id }}">
+                            <div class="vote-buttons">
+                                <button type="submit" name="vote" value="positive" class="btn btn-positive">支持正方</button>
+                                <button type="submit" name="vote" value="negative" class="btn btn-negative">支持反方</button>
+                            </div>
+                        </form>
+                        {% elif poll.status == 'active' and poll.has_voted %}
+                        <p class="vote-status">您已投票，等待其他投票人完成投票...</p>
+                        {% if 'admin' in user.roles or 'manager' in user.roles or 'guest' in user.roles %}
+                        <div class="poll-results-live">
+                            <h4>实时投票结果</h4>
+                            {% if poll.votes %}
+                            {% set positive_count = namespace(value=0) %}
+                            {% set negative_count = namespace(value=0) %}
+                            {% for voter_username, vote_option in poll.votes.items() %}
+                            {% if vote_option == 'positive' %}
+                            {% set positive_count.value = positive_count.value + 1 %}
+                            {% else %}
+                            {% set negative_count.value = negative_count.value + 1 %}
+                            {% endif %}
+                            {% endfor %}
+                            <div class="result-row">
+                                <span class="result-label">正方票数</span>
+                                <span class="result-value">{{ positive_count.value }}</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">反方票数</span>
+                                <span class="result-value">{{ negative_count.value }}</span>
+                            </div>
+                            <div class="vote-progress">
+                                <span>已投票：{{ poll.votes.keys() | list | length }}/{{ poll.voters | length }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% elif poll.status == 'completed' %}
+                        <div class="poll-results">
+                            {% if poll.results %}
+                            <div class="result-row">
+                                <span class="result-label">正方票数</span>
+                                <span class="result-value">{{ poll.results.positive_votes }}</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label">反方票数</span>
+                                <span class="result-value">{{ poll.results.negative_votes }}</span>
+                            </div>
+                            <div class="result-winner">
+                                {% if poll.results.winner == '平局' %}
+                                结果：平局
+                                {% else %}
+                                获胜方：{{ poll.results.winner }}
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="no-data">暂无参与的投票</p>
+                {% endif %}
+            </div>
+            
+            {% if 'admin' in user.roles or 'manager' in user.roles or 'guest' in user.roles %}
+            <div class="card">
+                <h2>所有投票</h2>
+                {% if polls %}
+                <table class="poll-table">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>辩题</th>
+                            <th>正方</th>
+                            <th>反方</th>
+                            <th>状态</th>
+                            <th>投票人</th>
+                            <th>已投票</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for poll in polls %}
+                        <tr>
+                            <td>{{ poll.id }}</td>
+                            <td>{{ poll.topic }}</td>
+                            <td>{{ poll.positive_side }}</td>
+                            <td>{{ poll.negative_side }}</td>
+                            <td>
+                                {% if poll.status == 'active' %}
+                                <span class="status-badge status-active">投票中</span>
+                                {% else %}
+                                <span class="status-badge status-completed">已结束</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ poll.voters | join(', ') }}</td>
+                            <td>{{ poll.votes.keys() | list | length }}/{{ poll.voters | length }}</td>
+                            <td>{{ poll.created_at }}</td>
+                            <td>
+                                {% if 'admin' in user.roles or 'manager' in user.roles or 'guest' in user.roles %}
+                                <form action="/vote/delete/{{ poll.id }}" method="POST" class="inline-form" onsubmit="return confirm('确定删除该投票吗？')">
+                                    <button type="submit" class="btn btn-small btn-danger">删除</button>
+                                </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="no-data">暂无投票</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </main>
+        
+        <footer>
+            <p>长友杯第二季辩论赛 &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
