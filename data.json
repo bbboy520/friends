@@ -1,0 +1,438 @@
+{
+  "users": [
+    {
+      "username": "安玲珊",
+      "password": "123456",
+      "name": "安玲珊",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "安玲珊"
+    },
+    {
+      "username": "王羿嘉彤",
+      "password": "123456",
+      "name": "王羿嘉彤",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "王羿嘉彤"
+    },
+    {
+      "username": "孙嘉栋",
+      "password": "123456",
+      "name": "孙嘉栋",
+      "roles": [
+        "player",
+        "manager"
+      ],
+      "contestant_name": "孙嘉栋"
+    },
+    {
+      "username": "孟庆博",
+      "password": "123456",
+      "name": "孟庆博",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "孟庆博"
+    },
+    {
+      "username": "张涵",
+      "password": "250945",
+      "name": "张涵",
+      "roles": [
+        "player",
+        "guest",
+        "admin"
+      ],
+      "contestant_name": "???"
+    },
+    {
+      "username": "谢佳琪",
+      "password": "123456",
+      "name": "谢佳琪",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "谢佳琪"
+    },
+    {
+      "username": "刘昕雨",
+      "password": "123456",
+      "name": "刘昕雨",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "刘昕雨"
+    },
+    {
+      "username": "杨沉析",
+      "password": "123456",
+      "name": "杨沉析",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "杨沉析"
+    },
+    {
+      "username": "乔方卿",
+      "password": "123456",
+      "name": "乔方卿",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "乔方卿"
+    },
+    {
+      "username": "张思佳",
+      "password": "123456",
+      "name": "张思佳",
+      "roles": [
+        "guest"
+      ],
+      "contestant_name": "张思佳"
+    },
+    {
+      "username": "董雪冰",
+      "password": "123456",
+      "name": "董雪冰",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "董雪冰"
+    },
+    {
+      "username": "付一洋",
+      "password": "123456",
+      "name": "付一洋",
+      "roles": [
+        "player"
+      ],
+      "contestant_name": "付一洋"
+    }
+  ],
+  "contestants": [
+    {
+      "name": "安玲珊",
+      "group": "A",
+      "is_guest": false
+    },
+    {
+      "name": "王羿嘉彤",
+      "group": "A",
+      "is_guest": false
+    },
+    {
+      "name": "孙嘉栋",
+      "group": "A",
+      "is_guest": false
+    },
+    {
+      "name": "孟庆博",
+      "group": "B",
+      "is_guest": false
+    },
+    {
+      "name": "???",
+      "group": "B",
+      "is_guest": true
+    },
+    {
+      "name": "谢佳琪",
+      "group": "B",
+      "is_guest": false
+    },
+    {
+      "name": "刘昕雨",
+      "group": "C",
+      "is_guest": false
+    },
+    {
+      "name": "杨沉析",
+      "group": "C",
+      "is_guest": false
+    },
+    {
+      "name": "乔方卿",
+      "group": "C",
+      "is_guest": false
+    }
+  ],
+  "matches": [],
+  "seasons": [
+    {
+      "season_number": 1,
+      "season_name": "第一届长友杯辩论赛",
+      "year": "2025冬",
+      "results": {
+        "champion": "谢佳琪",
+        "runner_up": "王羿嘉彤",
+        "third_place": "乔方卿",
+        "fourth_place": "安玲珊",
+        "fifth_place": "孙嘉栋",
+        "sixth_place": "刘昕雨"
+      },
+      "group_stage": {
+        "round1": [
+          {
+            "match": "A1 vs A2",
+            "topic": "青春最大的遗憾是我本可以/我不可以",
+            "side1": "正方：王羿嘉彤",
+            "side2": "反方：孙嘉栋",
+            "score": "104-0",
+            "winner": "王羿嘉彤"
+          },
+          {
+            "match": "B3 vs B2",
+            "topic": "抽象文化是当代年轻人的解药/毒药",
+            "side1": "正方：刘昕雨",
+            "side2": "反方：董雪冰",
+            "score": "105-0",
+            "winner": "刘昕雨"
+          },
+          {
+            "match": "C3 vs C1",
+            "topic": "爱情是/不是人类的必需品",
+            "side1": "正方：杨沉析",
+            "side2": "反方：乔方卿",
+            "score": "1-104",
+            "winner": "乔方卿"
+          }
+        ],
+        "round2": [
+          {
+            "match": "A2 vs A3",
+            "topic": "缺爱/不缺爱的人更懂得如何爱人",
+            "side1": "正方：孙嘉栋",
+            "side2": "反方：孟庆博",
+            "score": "101-2",
+            "winner": "孙嘉栋"
+          },
+          {
+            "match": "B3 vs B1",
+            "topic": "好的爱情让人相互依赖/彼此独立",
+            "side1": "正方：刘昕雨",
+            "side2": "反方：安玲珊",
+            "score": "0-102",
+            "winner": "安玲珊"
+          },
+          {
+            "match": "C4 vs C2",
+            "topic": "愚公应该移山/搬家",
+            "side1": "正方：谢佳琪",
+            "side2": "反方：付一洋",
+            "score": "102-0",
+            "winner": "谢佳琪"
+          },
+          {
+            "match": "C4 vs C3",
+            "topic": "飞机即将坠毁，要不要叫醒熟睡的爱人",
+            "side1": "正方：谢佳琪",
+            "side2": "反方：杨沉析",
+            "score": "101-1",
+            "winner": "谢佳琪"
+          }
+        ],
+        "round3": [
+          {
+            "match": "A3 vs A1",
+            "topic": "刻意追求富养自己会不会让自己更幸福",
+            "side1": "正方：孟庆博",
+            "side2": "反方：王羿嘉彤",
+            "score": "0-101",
+            "winner": "王羿嘉彤"
+          },
+          {
+            "match": "B2 vs B1",
+            "topic": "高考后填志愿应不应该以就业为第一考量",
+            "side1": "正方：董雪冰",
+            "side2": "反方：安玲珊",
+            "score": "0-102",
+            "winner": "安玲珊"
+          },
+          {
+            "match": "C1 vs C4",
+            "topic": "人终有一死是一件好事/坏事",
+            "side1": "正方：乔方卿",
+            "side2": "反方：谢佳琪",
+            "score": "101-1",
+            "winner": "乔方卿"
+          }
+        ],
+        "groups": {
+          "A": [
+            {
+              "name": "王羿嘉彤",
+              "points": 6,
+              "wins": 2,
+              "losses": 0,
+              "status": "晋级四强"
+            },
+            {
+              "name": "孙嘉栋",
+              "points": 3,
+              "wins": 1,
+              "losses": 1,
+              "status": "进入复活赛"
+            },
+            {
+              "name": "孟庆博",
+              "points": 0,
+              "wins": 0,
+              "losses": 2,
+              "status": "第七名"
+            }
+          ],
+          "B": [
+            {
+              "name": "安玲珊",
+              "points": 6,
+              "wins": 2,
+              "losses": 0,
+              "status": "晋级四强"
+            },
+            {
+              "name": "刘昕雨",
+              "points": 3,
+              "wins": 1,
+              "losses": 1,
+              "status": "进入复活赛"
+            },
+            {
+              "name": "董雪冰",
+              "points": 0,
+              "wins": 0,
+              "losses": 2,
+              "status": "第七名"
+            }
+          ],
+          "C": [
+            {
+              "name": "乔方卿",
+              "points": 6,
+              "wins": 2,
+              "losses": 0,
+              "status": "晋级四强"
+            },
+            {
+              "name": "谢佳琪",
+              "points": 3,
+              "wins": 1,
+              "losses": 1,
+              "status": "进入复活赛"
+            },
+            {
+              "name": "杨沉析",
+              "points": 0,
+              "wins": 0,
+              "losses": 2,
+              "status": "第七名"
+            },
+            {
+              "name": "付一洋",
+              "points": 0,
+              "wins": 0,
+              "losses": 0,
+              "status": "退赛"
+            }
+          ]
+        }
+      },
+      "repechage": {
+        "topic": "当今社会，孙悟空/猪八戒/沙僧谁能活得更好",
+        "participants": [
+          {
+            "name": "谢佳琪",
+            "role": "甲方",
+            "score": 150
+          },
+          {
+            "name": "刘昕雨",
+            "role": "乙方",
+            "score": 100
+          },
+          {
+            "name": "孙嘉栋",
+            "role": "丙方",
+            "score": 140
+          }
+        ],
+        "winner": "谢佳琪",
+        "advancing": "晋级四强",
+        "rankings": [
+          {
+            "name": "孙嘉栋",
+            "rank": "第五名"
+          },
+          {
+            "name": "刘昕雨",
+            "rank": "第六名"
+          }
+        ]
+      },
+      "semifinals": {
+        "final_four": [
+          "王羿嘉彤",
+          "安玲珊",
+          "乔方卿",
+          "谢佳琪"
+        ],
+        "round1": {
+          "topic": "文学理解应该以作者/读者为中心",
+          "side1": "正方：安玲珊 乔方卿",
+          "side2": "反方：王羿嘉彤 谢佳琪",
+          "score": "0-100",
+          "winner": "反方",
+          "team1": [
+            "安玲珊",
+            "乔方卿"
+          ],
+          "team2": [
+            "王羿嘉彤",
+            "谢佳琪"
+          ],
+          "winner_team": "王羿嘉彤 & 谢佳琪",
+          "notes": {
+            "advance": "谢佳琪",
+            "advance_note": "直接晋级决赛",
+            "pending_winner": "王羿嘉彤",
+            "pending_winner_note": "进入1v1赛段",
+            "pending_loser": "乔方卿",
+            "pending_loser_note": "进入1v1赛段",
+            "eliminated": "安玲珊",
+            "eliminated_note": "获得殿军（第四名）"
+          }
+        },
+        "round2": {
+          "topic": "痛彻心扉的感情更应该铭记/遗忘",
+          "side1": "正方：乔方卿",
+          "side2": "反方：王羿嘉彤",
+          "score": "0-100",
+          "match": {
+            "participant1": "王羿嘉彤",
+            "participant2": "乔方卿",
+            "winner": "王羿嘉彤",
+            "winner_note": "晋级决赛",
+            "loser_note": "获得季军"
+          }
+        }
+      },
+      "finals": {
+        "topic": "一切都是等价交换是一种祝福/诅咒",
+        "championship": {
+          "side1": "正方：谢佳琪",
+          "side2": "反方：王羿嘉彤",
+          "score": "3-1.5",
+          "participant1": "谢佳琪",
+          "participant1_note": "冠军",
+          "participant2": "王羿嘉彤",
+          "participant2_note": "亚军",
+          "winner": "谢佳琪",
+          "result": "冠军"
+        }
+      }
+    }
+  ],
+  "polls": []
+}
